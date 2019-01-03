@@ -62,7 +62,7 @@ fi
 cmake --build build --target all -- -j "$JOBS"
 checkfail $?
 
-sudo cmake --build build --target install
+sudo DESTDIR=$(pwd)/install cmake --build build --target install
 checkfail $?
 
 finish
