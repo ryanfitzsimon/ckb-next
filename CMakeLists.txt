@@ -133,6 +133,15 @@ if (NOT WITH_GUI)
     message(WARNING "Building without GUI. Proceed only if you know what you are doing.")
 endif ()
 
+# Determine init system.
+# This must be a non-forced CACHE variable so that it can be set when building
+# in restricted environments (chroot or similar) where detection will fail.
+include(CkbNextDetectInitSystem)
+detect_init_system()
+set(CKB_NEXT_INIT_SYSTEM ${CKB_NEXT_DETECTED_INIT_SYSTEM}
+    CACHE STRING "Init system targeted by installer")
+check_valid_init_system()
+
 # Project-specific compiler settings
 include(CkbNextCompileFlags)
 
